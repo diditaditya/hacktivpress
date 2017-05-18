@@ -1,5 +1,10 @@
 <template>
   <div class="hello">
+    <div class="">
+      <router-link to="/addArticle">
+        <button class="btn btn-primary" type="button">Add new Article</button>
+      </router-link>
+    </div>
     <h1>{{ msg }}</h1>
   </div>
 </template>
@@ -7,10 +12,21 @@
 <script>
 export default {
   name: 'hello',
+  props: ['articles'],
   data () {
     return {
       msg: 'Main Page'
     }
+  },
+  methods: {
+    checkArticles() {
+      if(this.articles.length === 0) {
+       this.msg = 'No articles found, please post some stories'
+      }
+    }
+  },
+  mounted: function() {
+    this.checkArticles();
   }
 }
 </script>

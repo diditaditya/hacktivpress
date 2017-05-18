@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="sidebar">
-    <p>asdkhaskd</p>
+    <p></p>
   </div>
 </template>
 

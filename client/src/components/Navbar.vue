@@ -10,12 +10,7 @@
       </router-link>
     </div>
     <div class="button-container">
-      <router-link to="/signin">
-        <button type="button" class="btn btn-warning">Log In</button>
-      </router-link>
-      <router-link to="/signup">
-        <button type="button" class="btn btn-default">Sign Up</button>
-      </router-link>
+      <button @click="logout" type="button" class="btn btn-default">Log Out</button>
     </div>
   </nav>
 </template>
@@ -31,6 +26,11 @@ export default {
   methods: {
     goHome() {
       this.$router.push('/');
+    },
+    logout() {
+      localStorage.clear();
+      this.$store.commit('logout');
+      this.$router.push('/')
     }
   }
 }
