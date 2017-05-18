@@ -1,4 +1,5 @@
 const User = require('../models/user');
+const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
@@ -96,8 +97,17 @@ let userControl = {
     } else {
       res.send('error');
     }
+  },
+  jwtCheck: function(req, res) {
+    let token = req.body.token;
+    jwt.verify(token, process.env.JWT_SECRET, function(err, decoded) {
+      if(err) {
+        res.send(err);
+      } else {
+        res.send(decoded);
+      }
+    });
   }
-
 }
 
 module.exports = userControl;
