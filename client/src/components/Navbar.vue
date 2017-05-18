@@ -1,18 +1,38 @@
 <template lang="html">
   <nav class="navbar navbar-light bg-primary">
-    <h4 class="navbar-brand"><b>hackPress</b></h4>
+    <h4 @click="goHome" class="navbar-brand"><b>hackPress</b></h4>
     <div class="button-container">
       <router-link to="/signin">
         <button type="button" class="btn btn-warning">Log In</button>
       </router-link>
-      <button type="button" class="btn btn-default">Sign Up</button>
+      <router-link to="/signup">
+        <button type="button" class="btn btn-default">Sign Up</button>
+      </router-link>
+    </div>
+    <div class="button-container">
+      <router-link to="/signin">
+        <button type="button" class="btn btn-warning">Log In</button>
+      </router-link>
+      <router-link to="/signup">
+        <button type="button" class="btn btn-default">Sign Up</button>
+      </router-link>
     </div>
   </nav>
 </template>
 
 <script>
 export default {
-  name: 'navbar'
+  name: 'navbar',
+  computed: {
+    user: function() {
+      return this.$store.getters.user;
+    }
+  },
+  methods: {
+    goHome() {
+      this.$router.push('/');
+    }
+  }
 }
 </script>
 
@@ -20,6 +40,10 @@ export default {
 
 .navbar {
   margin-top: -60px;
+}
+
+.navbar-brand {
+  cursor: pointer;
 }
 
 .button-container {

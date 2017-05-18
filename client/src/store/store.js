@@ -23,6 +23,26 @@ export const store = new Vuex.Store({
     categories(state) {
       return state.categories;
     }
+  },
+  mutations: {
+    signin(state, data) {
+      state.user.id = data.id;
+      state.user.username = data.username;
+      state.user.articles = data.articles;
+    }
+  },
+  actions: {
+    signin(context, data) {
+      let url = 'http://localhost:3000/signin';
+      Vue.axios.post(url, data)
+        .then((response) => {
+          localStorage.setItem('token', response.data.token);
+          context.commit('signin', data);
 
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   }
 });
