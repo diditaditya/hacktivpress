@@ -35,6 +35,15 @@ let articleControl = {
       }
     });
   },
+  findByAuthor: function(req, res) {
+    Article.find({author: req.params.id}).populate('author').exec(function(err, articles) {
+      if(err) {
+        res.send(err);
+      } else {
+        res.send(articles);
+      }
+    });
+  },
   create: function(req, res) {
     let title = req.body.title;
     let author = req.body.author;
@@ -54,7 +63,8 @@ let articleControl = {
         } else {
           let response = {
             status: 'success',
-            message: 'article is successfully created'
+            message: 'article is successfully created',
+            article: newArticle
           };
           res.send(response);
         }

@@ -21,7 +21,6 @@ let userControl = {
     });
   },
   findById: function(req, res) {
-
     User.findById(req.params.id).populate('articles').exec(function(err, user) {
       if(err) {
         res.send(err);
@@ -59,7 +58,8 @@ let userControl = {
               } else {
                 let newUser = new User({
                   username: username,
-                  password: hash
+                  password: hash,
+                  articles: []
                 });
                 newUser.save(function(err) {
                   if(err) {
@@ -67,7 +67,8 @@ let userControl = {
                   } else {
                     let response = {
                       status: 'success',
-                      message: 'username is successfully registered'
+                      message: 'username is successfully registered',
+                      user: newUser
                     };
                     res.send(response);
                   }

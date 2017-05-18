@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const passport = require('passport');
+const passport = require('../helpers/passport');
 const User = require('../controllers/user');
 const Article = require('../controllers/article');
 
@@ -9,16 +9,17 @@ router.get('/', (req, res) => {
 });
 
 // user endpoints
-router.get('/users', User.showAll);
-router.get('/user/:id', User.findById);
-router.post('/register', User.register);
-router.post('/signin', passport.authenticate('local-signin', {session: false}), User.signin);
+router.get('/users', User.showAll); // postman ok
+router.get('/user/:id', User.findById); // postman ok
+router.post('/register', User.register); // postman ok
+router.post('/signin', passport.authenticate('local-signin', {session: false}), User.signin); // postman ok
 
 // article endpoints
-router.get('/articles', Article.showAll);
-router.get('/article/:id', Article.findById);
-router.post('/articles', Article.create);
-router.put('/article/:id', Article.update);
-router.delete('/article/:id', Article.delete);
+router.get('/articles', Article.showAll); // postman ok
+router.get('/article/:id', Article.findById); // postman ok
+router.get('/articles/user/:id', Article.findByAuthor); // postman ok
+router.post('/articles', Article.create); // postman ok
+router.put('/article/:id', Article.update); //poastman ok
+router.delete('/article/:id', Article.delete); //postman ok
 
 module.exports = router;
